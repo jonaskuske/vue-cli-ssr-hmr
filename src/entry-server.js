@@ -22,8 +22,19 @@ export default context => {
         return reject({ code: 404 });
       }
 
-      context.state = store.state;
-      resolve(app);
+      Promise.all(
+        matchedComponents.map(({ asyncData }) => {
+          if (asyncData) {
+            return asyncData({
+              store,
+              route: router.currentRoute,
+            });
+          }
+        }),
+      ).then(() => {
+        context.state = store.state;
+        resolve(app);
+      }, reject);
     }, reject);
   });
 };
