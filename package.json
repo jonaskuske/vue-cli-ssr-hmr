@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "serve": "node server.js",
+    "serve:spa": "vue-cli-service serve",
+    "build": "cross-env NODE_ENV=production vue-cli-service build --mode ssr-client && cross-env NODE_ENV=production vue-cli-service build --mode ssr-server --no-clean",
+    "build:spa": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "cross-env": "^5.2.0",
+    "express": "^4.16.3",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.17",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -19,8 +25,14 @@
     "@vue/cli-plugin-pwa": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-prettier": "^3.0.1",
+    "chokidar": "^2.0.4",
     "lint-staged": "^7.2.2",
-    "vue-template-compiler": "^2.5.17"
+    "memory-fs": "^0.4.1",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.17.2",
+    "webpack-dev-middleware": "^3.2.0",
+    "webpack-hot-middleware": "^2.23.1",
+    "webpack-node-externals": "^1.7.2"
   },
   "eslintConfig": {
     "root": true,
@@ -35,6 +47,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "postcss": {
     "plugins": {
