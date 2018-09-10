@@ -6,11 +6,15 @@ module.exports = {
       .entry('app')
       .clear()
       .add('./src/entry-client.js')
-      .end()
-      .plugin('copy')
-      .tap(([[config]]) => [
-        [{ ...config, ignore: [...config.ignore, 'index.template.html'] }],
-      ]);
+      .end();
+
+    if (config.plugins.has('copy')) {
+      config
+        .plugin('copy')
+        .tap(([[config]]) => [
+          [{ ...config, ignore: [...config.ignore, 'index.template.html'] }],
+        ]);
+    }
 
     if (!enableSSR) return;
 

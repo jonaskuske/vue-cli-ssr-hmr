@@ -7,7 +7,7 @@
     "serve": "node server.js",
     "serve:spa": "vue-cli-service serve",
     "build": "cross-env NODE_ENV=production vue-cli-service build --mode ssr-client && cross-env NODE_ENV=production vue-cli-service build --mode ssr-server --no-clean",
-    "build:spa": "vue-cli-service build",
+    "build:spa": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
